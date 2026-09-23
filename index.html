@@ -1,0 +1,695 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Equipped 4 Life Summer Camp: a nonprofit summer camp in Limbe, Cameroon. Register a camper or apply to volunteer.">
+<link rel="icon" href="photos/logo-sm.jpg">
+<title>Equipped 4 Life Camp</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@600;700;800&family=Source+Sans+3:wght@400;600;700&display=swap">
+<style>
+/* Single, deliberate light look for a nonprofit: forest green (from the logo), white, one warm accent */
+:root{
+  color-scheme: light;
+  --bg:#FFFFFF;
+  --soft:#F3F6F1;
+  --line:#DDE5DA;
+  --ink:#16202E;
+  --muted:#566253;
+  --navy:#1F3A1E;
+  --navy-2:#2C4F2A;
+  --accent:#E9A23B;     /* warm amber, used for primary actions only */
+  --accent-ink:#1B1406;
+  --blue:#4C8A2B;       /* leaf green from the logo */
+  --ok:#1F7A4D;
+  --err:#B42335;
+  --display:"Libre Franklin","Helvetica Neue",Arial,system-ui,sans-serif;
+  --body:"Source Sans 3",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --r:8px;
+}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font:18px/1.6 var(--body);margin:0;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--blue);outline-offset:2px}
+.wrap{max-width:1160px;margin:0 auto;padding-inline:clamp(16px,4vw,40px)}
+h1,h2,h3{font-family:var(--display);line-height:1.12;margin:0;text-wrap:balance;letter-spacing:-.015em}
+p{margin:0}
+.eyebrow{font:700 13px/1 var(--display);letter-spacing:.14em;text-transform:uppercase;color:var(--blue)}
+
+/* ---------- header ---------- */
+header.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:30;background:#fff;border-bottom:1px solid var(--line)}
+header.top .wrap{display:flex;align-items:center;justify-content:space-between;gap:12px;padding-block:14px;flex-wrap:wrap}
+.logo{display:flex;align-items:center;gap:12px;text-decoration:none}
+.logo .mark{width:48px;height:48px;border-radius:50%;background:#fff;object-fit:contain;display:block;border:1px solid var(--line)}
+/* hero brand lockup: logo badge + camp name */
+.brand-lockup{display:flex;align-items:center;gap:clamp(16px,2.4vw,26px);flex-wrap:wrap}
+.brand-lockup img{width:clamp(92px,11vw,132px);height:auto;aspect-ratio:1;border-radius:50%;background:#fff;padding:8px;box-shadow:0 10px 30px rgba(0,0,0,.35);flex:none}
+.brand-lockup .bl-text{display:grid;gap:8px}
+.brand-lockup .bl-name{font:800 clamp(22px,2.8vw,32px)/1.05 var(--display);letter-spacing:-.01em;color:#fff}
+.brand-lockup .bl-sub{font:700 13px/1 var(--display);letter-spacing:.14em;text-transform:uppercase;color:var(--accent)}
+.logo .name{display:grid;gap:3px}
+.logo .name strong{font:800 17px/1 var(--display);letter-spacing:-.01em}
+.logo .name span{font:600 12px/1 var(--body);color:var(--muted);letter-spacing:.06em;text-transform:uppercase}
+nav.menu{display:flex;align-items:center;gap:2px;flex-wrap:wrap}
+nav.menu a{text-decoration:none;font:600 15.5px/1 var(--body);padding:10px 14px;color:var(--muted);border-bottom:2px solid transparent}
+nav.menu a:hover{color:var(--ink)}
+nav.menu a[aria-current="page"]{color:var(--navy);border-bottom-color:var(--accent)}
+nav.menu a.cta{background:var(--navy);color:#fff;border-radius:var(--r);margin-left:8px;border-bottom:0}
+nav.menu a.cta:hover,nav.menu a.cta[aria-current="page"]{background:var(--navy-2)}
+
+/* ---------- buttons ---------- */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;font:700 16px/1 var(--body);text-decoration:none;padding:15px 22px;border-radius:var(--r);border:1.5px solid var(--navy);background:transparent;color:var(--navy);cursor:pointer;transition:background .15s,color .15s,border-color .15s}
+.btn:hover{background:var(--navy);color:#fff}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.btn.primary:hover{background:#D48E27;border-color:#D48E27;color:var(--accent-ink)}
+.btn.navy{background:var(--navy);color:#fff}
+.btn.navy:hover{background:var(--navy-2)}
+.btn.light{border-color:rgba(255,255,255,.8);color:#fff}
+.btn.light:hover{background:#fff;color:var(--navy)}
+.row{display:flex;gap:12px;flex-wrap:wrap}
+
+/* ---------- pages ---------- */
+section.page{padding-block:clamp(40px,6vw,72px) 80px}
+section.page.flush{padding-top:0}
+.head{display:grid;gap:14px;max-width:780px;margin-bottom:44px}
+.head h1{font-size:clamp(34px,5vw,54px)}
+.head p{color:var(--muted);font-size:20px;max-width:62ch}
+.sec-head{display:grid;gap:10px;margin-bottom:28px;max-width:720px}
+.sec-head h2{font-size:clamp(28px,3.6vw,40px)}
+.sec-head p{color:var(--muted)}
+
+/* ---------- photo backgrounds ---------- */
+.photo-bg{position:relative;overflow:hidden;background:var(--navy);color:#fff;isolation:isolate}
+.photo-bg .slides{position:absolute;inset:0;z-index:-2}
+.photo-bg .slides div{position:absolute;inset:0;background-size:cover;background-position:center;opacity:0;transition:opacity 1.4s ease}
+.photo-bg .slides div.on{opacity:1}
+.photo-bg::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(90deg,rgba(14,28,13,.88) 0%,rgba(14,28,13,.68) 45%,rgba(14,28,13,.25) 100%)}
+@media (prefers-reduced-motion:no-preference){
+  .hero .slides div.on{animation:drift 9s ease-out both}
+  @keyframes drift{from{transform:scale(1.06)}to{transform:scale(1)}}
+}
+
+/* ---------- home ---------- */
+.hero .wrap{min-height:clamp(480px,72vh,720px);display:grid;align-content:center;gap:22px;padding-block:72px}
+.hero .eyebrow{color:var(--accent)}
+.hero h1{font-size:clamp(40px,6.4vw,76px);max-width:15ch;font-weight:800}
+.hero .lede{font-size:clamp(18px,2vw,21px);color:#DCE4EF;max-width:54ch}
+.hero .dots{display:flex;gap:8px;margin-top:10px}
+.hero .dots button{width:28px;height:4px;border:0;padding:0;background:rgba(255,255,255,.35);cursor:pointer}
+.hero .dots button[aria-current="true"]{background:var(--accent)}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);border-bottom:1px solid var(--line)}
+.stats div{padding:26px 24px;border-right:1px solid var(--line);display:grid;gap:4px}
+.stats div:last-child{border-right:0}
+.stats b{font:800 22px/1.2 var(--display);color:var(--navy)}
+.stats span{color:var(--muted);font-size:15.5px}
+.mission{display:grid;grid-template-columns:1fr 1.15fr;gap:clamp(28px,5vw,72px);align-items:start;padding-block:clamp(56px,8vw,96px)}
+.mission h2{font-size:clamp(30px,4vw,44px)}
+.mission .body{display:grid;gap:16px;color:var(--muted)}
+.mission .body strong{color:var(--ink)}
+.pillars{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border:1px solid var(--line);border-radius:var(--r);overflow:hidden}
+.pillar{padding:26px 24px;border-right:1px solid var(--line);display:grid;gap:10px;align-content:start;background:#fff}
+.pillar:last-child{border-right:0}
+.pillar svg{width:28px;height:28px;color:var(--blue)}
+.pillar h3{font-size:20px}
+.pillar p{color:var(--muted);font-size:16px}
+.band .wrap{padding-block:clamp(64px,9vw,112px);display:grid;gap:18px;max-width:1160px}
+.band h2{font-size:clamp(30px,4.4vw,48px);max-width:20ch}
+.band p{color:#DCE4EF;max-width:58ch;font-size:19px}
+.paths{display:grid;grid-template-columns:1fr 1fr;gap:24px;padding-block:clamp(56px,8vw,96px)}
+.path{border:1px solid var(--line);border-radius:var(--r);padding:clamp(24px,3vw,36px);display:grid;gap:14px;align-content:start;background:#fff}
+.path .eyebrow{color:var(--muted)}
+.path h3{font-size:clamp(24px,2.6vw,30px)}
+.path p{color:var(--muted)}
+.path ul{margin:0;padding-left:20px;color:var(--muted);display:grid;gap:6px;font-size:16.5px}
+.path .btn{justify-self:start;margin-top:8px}
+
+/* ---------- activities ---------- */
+.acts{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.act{border:1px solid var(--line);border-radius:var(--r);padding:26px;display:grid;gap:12px;align-content:start;background:#fff}
+.act svg{width:30px;height:30px;color:var(--blue)}
+.act h3{font-size:21px}
+.act p{color:var(--muted);font-size:16.5px}
+.act ul{margin:4px 0 0;padding:0;list-style:none;display:grid;gap:6px;font-size:15.5px;color:var(--ink)}
+.act li{padding-left:16px;position:relative}
+.act li::before{content:"";position:absolute;left:0;top:.62em;width:6px;height:6px;background:var(--accent)}
+.day{margin-top:72px;display:grid;grid-template-columns:1fr 1.3fr;gap:clamp(24px,4vw,56px);align-items:start}
+.day h2{font-size:clamp(28px,3.4vw,38px)}
+.day > div > p{color:var(--muted);margin-top:14px}
+.note{display:inline-block;font-size:13px;font-weight:700;color:var(--muted);border:1px solid var(--line);border-radius:4px;padding:1px 7px;margin-left:4px}
+table.sched{width:100%;border-collapse:collapse;font-size:16.5px}
+.sched th,.sched td{text-align:left;padding:14px 16px;border-bottom:1px solid var(--line);vertical-align:top}
+.sched th{width:96px;font-weight:700;color:var(--navy);font-variant-numeric:tabular-nums;white-space:nowrap}
+.sched tr:nth-child(odd){background:var(--soft)}
+.cta-band{margin-top:72px;background:var(--navy);color:#fff;border-radius:var(--r);padding:clamp(28px,4vw,48px);display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap}
+.cta-band h2{font-size:clamp(26px,3.2vw,34px)}
+.cta-band p{color:#C7D2E0;margin-top:6px}
+
+/* ---------- gallery ---------- */
+.album{display:grid;grid-template-columns:1.4fr 1fr;border:1px solid var(--line);border-radius:var(--r);overflow:hidden;margin-bottom:56px}
+.album .cover{min-height:300px;background:var(--navy) center/cover no-repeat}
+.album .info{padding:clamp(24px,3.5vw,40px);display:grid;gap:14px;align-content:center;background:var(--soft)}
+.album .info h2{font-size:clamp(24px,3vw,32px)}
+.album dl{display:grid;grid-template-columns:auto 1fr;gap:6px 16px;margin:0;font-size:16px}
+.album dt{color:var(--muted)}
+.album dd{margin:0;font-weight:600}
+.g-section{margin-top:56px}
+.g-section:first-of-type{margin-top:0}
+.grid-photos{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px}
+.grid-photos button{padding:0;border:0;background:var(--soft);cursor:zoom-in;border-radius:6px;overflow:hidden;aspect-ratio:3/2;display:block}
+.grid-photos img{width:100%;height:100%;max-width:100%;object-fit:cover;display:block;transition:transform .3s}
+.grid-photos button:hover img{transform:scale(1.03)}
+.pending{border:1px dashed var(--line);border-radius:var(--r);padding:22px;color:var(--muted);font-size:16px}
+dialog.lb{border:0;padding:0;background:transparent;max-width:min(1100px,94vw);max-height:92vh}
+dialog.lb::backdrop{background:rgba(10,18,9,.9)}
+dialog.lb img{display:block;max-width:100%;max-height:82vh;border-radius:4px}
+dialog.lb .bar{display:flex;justify-content:space-between;align-items:center;gap:12px;padding-top:10px;color:#fff;font-size:15px}
+dialog.lb .bar button{font:700 15px/1 var(--body);background:#fff;color:var(--navy);border:0;border-radius:6px;padding:10px 14px;cursor:pointer}
+
+/* ---------- register ---------- */
+.reg{display:grid;grid-template-columns:minmax(0,1fr) 330px;gap:40px;align-items:start}
+.tabs{display:flex;border-bottom:1px solid var(--line);margin-bottom:26px;gap:4px;flex-wrap:wrap}
+.tabs button{font:700 16px/1 var(--body);border:0;border-bottom:3px solid transparent;background:transparent;color:var(--muted);padding:14px 16px;cursor:pointer;margin-bottom:-1px}
+.tabs button[aria-selected="true"]{color:var(--navy);border-bottom-color:var(--accent)}
+form.card{display:grid;gap:22px}
+form h2{font-size:26px}
+fieldset{border:1px solid var(--line);border-radius:var(--r);padding:22px;margin:0;display:grid;gap:18px}
+legend{font:700 14px/1 var(--display);letter-spacing:.08em;text-transform:uppercase;color:var(--navy);padding:0 8px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.field{display:grid;gap:6px}
+.field label{font-weight:700;font-size:15.5px}
+.field .hint{font-size:14px;color:var(--muted)}
+input,select,textarea{font:16px/1.4 var(--body);color:var(--ink);background:#fff;border:1px solid #C5CED8;border-radius:6px;padding:12px 13px;width:100%}
+textarea{min-height:96px;resize:vertical}
+input:focus,select:focus,textarea:focus{outline:none;border-color:var(--blue);box-shadow:0 0 0 3px rgba(76,138,43,.2)}
+.invalid{border-color:var(--err)!important;box-shadow:0 0 0 3px rgba(180,35,53,.12)!important}
+.check{display:grid;grid-template-columns:22px 1fr;gap:10px;align-items:start;font-size:16px}
+.check input{width:18px;height:18px;margin-top:4px;accent-color:var(--navy)}
+.err{color:var(--err);font-weight:700;font-size:15.5px}
+.opts{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.opts label{display:flex;align-items:center;gap:10px;font-weight:600;font-size:15.5px;padding:10px 12px;border:1px solid var(--line);border-radius:6px;cursor:pointer}
+.opts input{width:auto;accent-color:var(--navy)}
+.opts label:has(input:checked){border-color:var(--navy);background:#EEF4EA}
+.done{border:1px solid var(--ok);background:#EEF7F2;border-radius:var(--r);padding:clamp(20px,3vw,32px);display:grid;gap:14px}
+.done h2{font-size:26px}
+.done pre{white-space:pre-wrap;font:14px/1.5 ui-monospace,Menlo,Consolas,monospace;background:#fff;border:1px solid var(--line);border-radius:6px;padding:14px;margin:0;max-height:260px;overflow:auto}
+aside.side{display:grid;gap:18px;position:sticky;top:96px}
+.side .box{border:1px solid var(--line);border-radius:var(--r);padding:24px;display:grid;gap:12px;background:var(--soft)}
+.side h3{font-size:19px}
+.side ol{margin:0;padding-left:20px;display:grid;gap:8px;color:var(--muted);font-size:16px}
+.side .k{font-size:14px;color:var(--muted)}
+.side .v{font-weight:700;word-break:break-all;user-select:all}
+
+/* ---------- footer ---------- */
+footer{background:var(--navy);color:#fff}
+footer .wrap{padding-block:52px 44px;display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:32px}
+footer .logo .mark{border-color:transparent}
+footer .logo .name span{color:#AEBBCD}
+footer h3{font:700 14px/1 var(--display);letter-spacing:.1em;text-transform:uppercase;margin-bottom:14px;color:#AEBBCD}
+footer p,footer li{color:#D5DDE8;font-size:16px}
+footer ul{list-style:none;margin:0;padding:0;display:grid;gap:9px}
+footer a{color:#fff;text-decoration:none}
+footer a:hover{text-decoration:underline}
+.legal{border-top:1px solid rgba(255,255,255,.12)}
+.legal .wrap{padding-block:18px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;font-size:14px;color:#AEBBCD}
+
+/* ---------- responsive ---------- */
+@media (max-width:980px){
+  .mission,.day,.album,.reg,.paths{grid-template-columns:1fr}
+  .pillars,.stats{grid-template-columns:1fr 1fr}
+  .pillar:nth-child(2){border-right:0}
+  .pillar:nth-child(-n+2){border-bottom:1px solid var(--line)}
+  .stats div:nth-child(2){border-right:0}
+  .stats div:nth-child(-n+2){border-bottom:1px solid var(--line)}
+  .acts{grid-template-columns:1fr 1fr}
+  aside.side{position:static}
+  footer .wrap{grid-template-columns:1fr 1fr}
+}
+@media (max-width:620px){
+  .pillars,.stats,.acts,.grid2,.opts{grid-template-columns:1fr}
+  .pillar,.stats div{border-right:0;border-bottom:1px solid var(--line)}
+  .pillar:last-child,.stats div:last-child{border-bottom:0}
+  footer .wrap{grid-template-columns:1fr}
+  nav.menu a{padding:9px 10px;font-size:15px}
+  .photo-bg::after{background:linear-gradient(180deg,rgba(14,28,13,.7),rgba(14,28,13,.88))}
+}
+</style>
+<style>img{max-width:100%}[hidden]{display:none!important}</style>
+</head>
+<body>
+<header class="top">
+  <div class="wrap">
+    <a class="logo" href="#home" aria-label="Equipped 4 Life Summer Camp, home">
+      <img class="mark" src="photos/logo-sm.jpg" alt="">
+      <span class="name"><strong>Equipped 4 Life</strong><span>Summer Camp · Limbe</span></span>
+    </a>
+    <nav class="menu" aria-label="Main">
+      <a href="#home" data-page="home">Home</a>
+      <a href="#gallery" data-page="gallery">Gallery</a>
+      <a href="#activities" data-page="activities">Activities</a>
+      <a href="#register" data-page="register" class="cta">Register</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+<!-- ======================= HOME ======================= -->
+<section class="page flush" id="page-home">
+  <div class="hero photo-bg">
+    <div class="slides" id="hero-slides" aria-hidden="true"></div>
+    <div class="wrap">
+      <div class="brand-lockup">
+        <img src="photos/logo.jpg" alt="Equipped 4 Life logo: a tree with deep roots">
+        <div class="bl-text"><span class="bl-name">Equipped 4 Life Summer Camp</span><span class="bl-sub">Nonprofit · Limbe, Cameroon</span></div>
+      </div>
+      <h1>Equipping young people with skills for life</h1>
+      <p class="lede">Equipped 4 Life gives adolescent boys and girls the chance to step out of their normal environment, learn practical skills, and connect with mentors and with each other.</p>
+      <div class="row" style="margin-top:6px">
+        <a class="btn primary" href="#register" data-tab="camper">Register a camper</a>
+        <a class="btn light" href="#register" data-tab="volunteer">Volunteer with us</a>
+      </div>
+      <div class="dots" id="hero-dots" role="group" aria-label="Background photos"></div>
+    </div>
+  </div>
+
+  <div class="wrap">
+    <div class="stats">
+      <div><b>Adolescents</b><span>Boys and girls, grouped by age</span></div>
+      <div><b>Digital skills</b><span>Hands-on laptop sessions</span></div>
+      <div><b>Mentorship</b><span>Guided by trained volunteers</span></div>
+      <div><b>Summer 2027</b><span>Dates announced soon</span></div>
+    </div>
+
+    <div class="mission">
+      <div>
+        <span class="eyebrow">Our mission</span>
+        <h2 style="margin-top:12px">A safe place to learn, grow and connect</h2>
+      </div>
+      <div class="body">
+        <p>Many young people rarely get the chance to step outside their daily routine. Equipped 4 Life creates that space: a structured, supervised camp where campers build <strong>practical skills</strong>, gain <strong>confidence</strong> and form <strong>friendships</strong> that last beyond the summer.</p>
+        <p>Campers spend time on digital skills, life skills and leadership, and take part in outdoor activities, whatever the weather. Every session is led by volunteers who care about young people's growth.</p>
+      </div>
+    </div>
+
+    <div class="pillars">
+      <div class="pillar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="12" rx="1.5"/><path d="M2 20h20"/></svg><h3>Digital skills</h3><p>Computer and internet skills that open doors at school and at work.</p></div>
+      <div class="pillar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 3 8l9 5 9-5-9-5Z"/><path d="M7 10.5V16c0 1.7 2.2 3 5 3s5-1.3 5-3v-5.5"/></svg><h3>Life skills</h3><p>Good decisions, responsibility and self-care for everyday life.</p></div>
+      <div class="pillar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="8" r="3"/><circle cx="17" cy="9" r="2.5"/><path d="M2 20c0-3.3 2.7-6 6-6s6 2.7 6 6M14.5 20c0-2.5 1.2-4.6 3-4.6S21 17.5 21 20"/></svg><h3>Connection</h3><p>Team activities that build respect, friendship and belonging.</p></div>
+      <div class="pillar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20 10 8l4 6 2-3 4 9Z"/><circle cx="17" cy="5" r="2"/></svg><h3>Outdoor experience</h3><p>Excursions and time outdoors, away from the usual environment.</p></div>
+    </div>
+  </div>
+
+  <div class="band photo-bg" style="margin-top:clamp(56px,8vw,96px)">
+    <div class="slides" id="band-slides" aria-hidden="true"></div>
+    <div class="wrap">
+      <span class="eyebrow" style="color:var(--accent)">Camp 2026</span>
+      <h2>Learning, teamwork and friendship</h2>
+      <p>At the August 2026 camp, young people worked in teams, shared ideas and made new friends, guided by volunteer mentors. See the moments in our gallery.</p>
+      <div class="row" style="margin-top:8px"><a class="btn light" href="#gallery">View the gallery</a></div>
+    </div>
+  </div>
+
+  <div class="wrap">
+    <div class="paths">
+      <div class="path">
+        <span class="eyebrow">Parents &amp; guardians</span>
+        <h3>Register your child</h3>
+        <p>Give your child a structured, supervised summer experience.</p>
+        <ul><li>Takes about five minutes</li><li>Sent straight to the camp team on WhatsApp</li><li>We confirm the dates, fees and what to bring</li></ul>
+        <a class="btn navy" href="#register" data-tab="camper">Register a camper</a>
+      </div>
+      <div class="path">
+        <span class="eyebrow">Volunteers</span>
+        <h3>Serve as a volunteer</h3>
+        <p>Teachers, students and professionals aged 18 and over are welcome.</p>
+        <ul><li>Lead a session or mentor a group</li><li>Help with media, logistics or first aid</li><li>Short orientation before camp</li></ul>
+        <a class="btn" href="#register" data-tab="volunteer">Apply to volunteer</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= GALLERY ======================= -->
+<section class="page wrap" id="page-gallery" hidden>
+  <div class="head">
+    <span class="eyebrow">Gallery</span>
+    <h1>Camp in pictures</h1>
+    <p>Photos from the Equipped 4 Life Summer Camp, showing campers learning, exploring and growing together.</p>
+  </div>
+
+  <div class="album">
+    <div class="cover" id="album-cover" role="img" aria-label="Camp 2026 cover photo"></div>
+    <div class="info">
+      <span class="eyebrow">Full album</span>
+      <h2>Equipped 4 Life Summer Camp 2026</h2>
+      <dl><dt>Date</dt><dd>August 2026</dd><dt>Location</dt><dd>Limbe, Cameroon</dd><dt>Photography</dt><dd>Enang Kareme</dd></dl>
+      <div class="row"><a class="btn navy" href="https://enangkareme.pixieset.com/equipped4lifesummercamp2026/" target="_blank" rel="noopener">Open the full album ↗</a></div>
+    </div>
+  </div>
+
+  <div id="g-sections"></div>
+</section>
+
+<!-- ======================= ACTIVITIES ======================= -->
+<section class="page wrap" id="page-activities" hidden>
+  <div class="head">
+    <span class="eyebrow">Programme</span>
+    <h1>Camp activities</h1>
+    <p>The programme balances learning with experience. Campers rotate through six areas, each led by a trained volunteer and adapted to the campers' ages.</p>
+  </div>
+
+  <div class="acts" id="acts"></div>
+
+  <div class="day">
+    <div>
+      <span class="eyebrow">A day at camp</span>
+      <h2 style="margin-top:12px">Sample daily schedule</h2>
+      <p>Each day is structured and supervised from arrival to pick-up. Final times are shared with families after registration. <span class="note">Sample</span></p>
+    </div>
+    <div style="overflow-x:auto">
+      <table class="sched">
+        <tr><th>8:30</th><td><b>Arrival and morning assembly</b>: welcome, notices and the day's theme</td></tr>
+        <tr><th>9:30</th><td><b>Session 1</b>: digital skills or life skills</td></tr>
+        <tr><th>11:00</th><td>Break</td></tr>
+        <tr><th>11:30</th><td><b>Session 2</b>: leadership and public speaking</td></tr>
+        <tr><th>13:00</th><td>Lunch</td></tr>
+        <tr><th>14:00</th><td><b>Outdoor activity</b>: excursion, sports or team challenge</td></tr>
+        <tr><th>15:30</th><td>Reflection and pick-up</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="cta-band">
+    <div>
+      <h2>Take part in the next camp</h2>
+      <p>Register a camper, or apply to volunteer and lead a session.</p>
+    </div>
+    <div class="row">
+      <a class="btn primary" href="#register" data-tab="camper">Register a camper</a>
+      <a class="btn light" href="#register" data-tab="volunteer">Apply to volunteer</a>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= REGISTER ======================= -->
+<section class="page wrap" id="page-register" hidden>
+  <div class="head">
+    <span class="eyebrow">Registration</span>
+    <h1>Register or apply to volunteer</h1>
+    <p>Complete the form and select Submit. WhatsApp then opens with your answers ready to send to the camp team, who will reply with the next steps.</p>
+  </div>
+
+  <div class="reg">
+    <div>
+      <div class="tabs" role="tablist" aria-label="Registration type">
+        <button type="button" role="tab" id="tab-camper" aria-selected="true" aria-controls="form-camper">Camper registration</button>
+        <button type="button" role="tab" id="tab-volunteer" aria-selected="false" aria-controls="form-volunteer">Volunteer application</button>
+      </div>
+
+      <form class="card" id="form-camper" novalidate>
+        <fieldset>
+          <legend>Camper</legend>
+          <div class="grid2">
+            <div class="field"><label for="c-name">Full name *</label><input id="c-name" name="Camper's name" required autocomplete="off"></div>
+            <div class="field"><label for="c-age">Age *</label><input id="c-age" name="Age" type="number" min="9" max="19" required inputmode="numeric"></div>
+            <div class="field"><label for="c-gender">Gender</label><select id="c-gender" name="Gender"><option value="">Select</option><option>Female</option><option>Male</option></select></div>
+            <div class="field"><label for="c-school">School and class</label><input id="c-school" name="School & class" placeholder="e.g. GBHS Limbe, Form 2"></div>
+          </div>
+          <div class="field">
+            <label>Areas of interest</label>
+            <div class="opts" id="c-acts"></div>
+          </div>
+          <div class="field"><label for="c-health">Allergies, medical or other needs</label><textarea id="c-health" name="Health notes" placeholder="Leave blank if none"></textarea></div>
+        </fieldset>
+        <fieldset>
+          <legend>Parent or guardian</legend>
+          <div class="grid2">
+            <div class="field"><label for="c-parent">Full name *</label><input id="c-parent" name="Parent/guardian" required autocomplete="name"></div>
+            <div class="field"><label for="c-phone">WhatsApp / phone *</label><input id="c-phone" name="Parent phone" type="tel" required autocomplete="tel" placeholder="+237 6XX XXX XXX"></div>
+            <div class="field"><label for="c-email">Email</label><input id="c-email" name="Parent email" type="email" autocomplete="email"></div>
+            <div class="field"><label for="c-town">Town / neighbourhood *</label><input id="c-town" name="Town" required></div>
+          </div>
+          <div class="field"><label for="c-heard">How did you hear about the camp?</label><select id="c-heard" name="Heard via"><option value="">Select</option><option>Facebook</option><option>WhatsApp</option><option>School or church</option><option>Friend or family</option><option>Attended a past camp</option><option>Other</option></select></div>
+        </fieldset>
+        <label class="check" for="c-consent"><input id="c-consent" type="checkbox" required><span>I am this camper's parent or legal guardian. I consent to their participation in camp activities and to camp photography. *</span></label>
+        <p class="err" id="c-err" hidden>Please complete the highlighted fields.</p>
+        <div class="row"><button class="btn primary" type="submit">Submit registration</button></div>
+      </form>
+
+      <form class="card" id="form-volunteer" novalidate hidden>
+        <fieldset>
+          <legend>About you</legend>
+          <div class="grid2">
+            <div class="field"><label for="v-name">Full name *</label><input id="v-name" name="Name" required autocomplete="name"></div>
+            <div class="field"><label for="v-age">Age *</label><input id="v-age" name="Age" type="number" min="18" max="99" required inputmode="numeric"><span class="hint">Volunteers must be 18 or older.</span></div>
+            <div class="field"><label for="v-phone">WhatsApp / phone *</label><input id="v-phone" name="Phone" type="tel" required autocomplete="tel" placeholder="+237 6XX XXX XXX"></div>
+            <div class="field"><label for="v-email">Email</label><input id="v-email" name="Email" type="email" autocomplete="email"></div>
+            <div class="field"><label for="v-town">Town / neighbourhood *</label><input id="v-town" name="Town" required></div>
+            <div class="field"><label for="v-occ">Occupation or field of study</label><input id="v-occ" name="Occupation" placeholder="e.g. Teacher, university student"></div>
+          </div>
+        </fieldset>
+        <fieldset>
+          <legend>Your contribution</legend>
+          <div class="field">
+            <label>Preferred roles *</label>
+            <div class="opts" id="v-roles"></div>
+          </div>
+          <div class="field"><label for="v-avail">Availability *</label><select id="v-avail" name="Availability" required><option value="">Select</option><option>The whole camp</option><option>Some days only</option><option>Before camp (planning and preparation)</option></select></div>
+          <div class="field"><label for="v-exp">Experience with young people</label><textarea id="v-exp" name="Experience"></textarea></div>
+          <div class="field"><label for="v-why">Why would you like to volunteer? *</label><textarea id="v-why" name="Motivation" required></textarea></div>
+        </fieldset>
+        <label class="check" for="v-consent"><input id="v-consent" type="checkbox" required><span>I agree to follow the camp's child-safeguarding guidelines and understand that the team may contact my references. *</span></label>
+        <p class="err" id="v-err" hidden>Please complete the highlighted fields.</p>
+        <div class="row"><button class="btn primary" type="submit">Submit application</button></div>
+      </form>
+
+      <div class="done" id="done" hidden>
+        <h2>Final step: send on WhatsApp</h2>
+        <p>Select the button below. WhatsApp opens with your details already filled in. Then press <b>Send</b>.</p>
+        <div class="row">
+          <a class="btn navy" id="wa-link" href="#" target="_blank" rel="noopener">Send on WhatsApp ↗</a>
+          <button class="btn" type="button" id="copy-msg">Copy details</button>
+          <button class="btn" type="button" id="edit-again">Edit answers</button>
+        </div>
+        <p style="font-size:16px">If WhatsApp does not open, copy your details and send them to <b id="wa-num-2"></b> or <b>equipforlife2025@gmail.com</b>.</p>
+        <pre id="msg-preview"></pre>
+      </div>
+      <p id="gform" hidden style="margin-top:18px;color:var(--muted)">Prefer a standard form? <a id="gform-link" href="#" target="_blank" rel="noopener"><b>Use our Google Form ↗</b></a></p>
+    </div>
+
+    <aside class="side">
+      <div class="box">
+        <h3>What happens next</h3>
+        <ol>
+          <li>You send your details on WhatsApp.</li>
+          <li>The camp team confirms your place and shares dates and any fees.</li>
+          <li>Campers receive a packing list. Volunteers are invited to an orientation.</li>
+        </ol>
+      </div>
+      <div class="box">
+        <h3>Contact the camp team</h3>
+        <div><div class="k">Phone / WhatsApp</div><div class="v" id="wa-num"></div></div>
+        <div><div class="k">Email</div><div class="v">equipforlife2025@gmail.com</div></div>
+        <div><div class="k">Location</div><div class="v" style="user-select:auto">Limbe, Cameroon</div></div>
+        <a class="btn" style="justify-self:start" id="wa-chat" href="#" target="_blank" rel="noopener">Message on WhatsApp ↗</a>
+      </div>
+    </aside>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div>
+      <a class="logo" href="#home"><img class="mark" src="photos/logo-sm.jpg" alt=""><span class="name"><strong>Equipped 4 Life</strong><span>Summer Camp · Limbe</span></span></a>
+      <p style="margin-top:16px;max-width:42ch">A nonprofit summer camp giving adolescent boys and girls the chance to step out of their normal environment and connect.</p>
+    </div>
+    <div>
+      <h3>Contact</h3>
+      <ul><li>+237 650 97 26 93</li><li style="word-break:break-all">equipforlife2025@gmail.com</li><li>Limbe, Cameroon</li></ul>
+    </div>
+    <div>
+      <h3>Follow</h3>
+      <ul>
+        <li><a href="https://www.facebook.com/profile.php?id=61579603370080" target="_blank" rel="noopener">Facebook ↗</a></li>
+        <li><a id="foot-wa" href="#" target="_blank" rel="noopener">WhatsApp ↗</a></li>
+        <li><a href="https://enangkareme.pixieset.com/equipped4lifesummercamp2026/" target="_blank" rel="noopener">2026 photo album ↗</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="legal"><div class="wrap"><span>© <span id="yr"></span> Equipped 4 Life Summer Camp</span><span>Photos: Equipped 4 Life Summer Camp</span></div></div>
+</footer>
+
+<dialog class="lb" id="lb" aria-label="Photo viewer">
+  <img id="lb-img" alt="">
+  <div class="bar"><span id="lb-cap"></span><button type="button" id="lb-close">Close</button></div>
+</dialog>
+
+<script>
+/* ============ EDIT HERE: camp settings ============ */
+const CAMP = {
+  whatsapp: "237650972693",
+  whatsappDisplay: "+237 650 97 26 93",
+  googleForm: "",   // paste a Google Form link here to show it as an alternative
+  heroPhotos: ["photos/fb-cheer.jpg","photos/fb-5.jpg","photos/fb-8.jpg","photos/fb-2.jpg","photos/fb-4.jpg"],  // home page background slideshow
+  bandPhotos: ["photos/fb-7.jpg","photos/fb-6.jpg","photos/fb-1.jpg"],  // "Camp 2026" band background
+  albumCover: "photos/fb-cheer.jpg",
+  gallery: [
+    {title:"Learning together", text:"Campers in their camp T-shirts work through activity booklets in small groups, guided by volunteers.", photos:[
+      {src:"photos/fb-5.jpg", caption:"Group work with a volunteer mentor"},
+      {src:"photos/fb-1.jpg", caption:"Focused on the day's activity"},
+      {src:"photos/fb-4.jpg", caption:"Writing down ideas"},
+      {src:"photos/fb-2.jpg", caption:"Reading through the camp booklet"},
+      {src:"photos/fb-3.jpg", caption:"Sharing answers with the group"},
+      {src:"photos/fb-7.jpg", caption:"Team discussion"},
+      {src:"photos/fb-8.jpg", caption:"Working side by side"},
+      {src:"photos/fb-6.jpg", caption:"Teamwork in the pink team"}
+    ]},
+    {title:"More moments", text:"Laptop sessions, outdoor walks in the rain and more from camp 2026.", photos:[]}
+  ],
+  activities: [
+    {name:"Digital Skills", icon:'<rect x="3" y="4" width="18" height="12" rx="1.5"/><path d="M2 20h20"/>',
+     text:"Practical computer sessions on laptops, from typing and documents to safe internet use and first steps in coding.",
+     points:["Computer basics","Online safety","Introduction to coding"]},
+    {name:"Life Skills", icon:'<path d="M12 3 3 8l9 5 9-5-9-5Z"/><path d="M7 10.5V16c0 1.7 2.2 3 5 3s5-1.3 5-3v-5.5"/>',
+     text:"Guided discussions and exercises on the choices young people face every day.",
+     points:["Decision-making","Health and hygiene","Money basics"]},
+    {name:"Leadership & Public Speaking", icon:'<path d="M12 3a3 3 0 0 1 3 3v5a3 3 0 0 1-6 0V6a3 3 0 0 1 3-3Z"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/>',
+     text:"Campers practise presenting ideas, working in teams and taking responsibility.",
+     points:["Presentations","Group leadership","Debate"]},
+    {name:"Outdoor Excursions", icon:'<path d="M4 20 10 8l4 6 2-3 4 9Z"/><circle cx="17" cy="5" r="2"/>',
+     text:"Supervised walks and visits that take campers out of their usual environment.",
+     points:["Nature walks","Community visits","Team challenges"]},
+    {name:"Sports & Teamwork", icon:'<circle cx="12" cy="12" r="9"/><path d="M12 3v18M3 12h18"/>',
+     text:"Games and sports that build fitness, fair play and cooperation.",
+     points:["Football","Relay games","Cooperative challenges"]},
+    {name:"Creative Expression", icon:'<path d="M12 3a9 9 0 1 0 0 18c1.5 0 2-1 2-2 0-1.5-1.5-2-1.5-3.5S14 13 16 13h2a3 3 0 0 0 3-3c0-4-4-7-9-7Z"/>',
+     text:"Art, music and drama give campers another way to express themselves. Camp ends with a closing showcase for families.",
+     points:["Art and design","Music and drama","Closing showcase"]}
+  ],
+  volunteerRoles:["Lead a session","Group mentor","Photography and media","Logistics","First aid","Registration desk"]
+};
+/* ================================================== */
+
+(function(){
+  const PAGES=["home","gallery","activities","register"];
+  const $=id=>document.getElementById(id);
+  const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+  const icon=p=>`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">${p}</svg>`;
+  const waBase="https://wa.me/"+CAMP.whatsapp;
+  const reduce=matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  $("yr").textContent=new Date().getFullYear();
+  $("wa-num").textContent=CAMP.whatsappDisplay; $("wa-num-2").textContent=CAMP.whatsappDisplay;
+  $("wa-chat").href=waBase; $("foot-wa").href=waBase;
+  if(/^https:\/\//.test(CAMP.googleForm)){ $("gform-link").href=CAMP.googleForm; $("gform").hidden=false; }
+
+  // photo backgrounds
+  function slideshow(el,photos,dotsEl){
+    if(!photos.length) return;
+    el.innerHTML=photos.map((p,i)=>`<div class="${i?"":"on"}" style="background-image:url('${encodeURI(p)}')"></div>`).join("");
+    const slides=[...el.children]; let i=0, timer=null;
+    const go=n=>{slides[i].classList.remove("on"); i=(n+slides.length)%slides.length;
+      const s=slides[i]; s.classList.remove("on"); void s.offsetWidth; s.classList.add("on");
+      if(dotsEl) [...dotsEl.children].forEach((d,k)=>d.setAttribute("aria-current",k===i));};
+    if(dotsEl && photos.length>1){
+      dotsEl.innerHTML=photos.map((_,k)=>`<button type="button" aria-label="Photo ${k+1}" aria-current="${k===0}"></button>`).join("");
+      [...dotsEl.children].forEach((d,k)=>d.onclick=()=>{go(k);restart();});
+    }
+    const restart=()=>{clearInterval(timer); if(photos.length>1&&!reduce) timer=setInterval(()=>go(i+1),6500);};
+    restart();
+  }
+  slideshow($("hero-slides"),CAMP.heroPhotos,$("hero-dots"));
+  slideshow($("band-slides"),CAMP.bandPhotos,null);
+  if(CAMP.albumCover) $("album-cover").style.backgroundImage=`url('${encodeURI(CAMP.albumCover)}')`;
+
+  // gallery
+  $("g-sections").innerHTML=CAMP.gallery.map((g,gi)=>`
+    <div class="g-section">
+      <div class="sec-head"><h2>${esc(g.title)}</h2><p>${esc(g.text)}</p></div>
+      ${g.photos.length?`<div class="grid-photos">${g.photos.map((p,pi)=>`<button type="button" data-g="${gi}" data-p="${pi}" aria-label="Enlarge: ${esc(p.caption)}"><img src="${esc(p.src)}" alt="${esc(p.caption)}" loading="lazy"></button>`).join("")}</div>`
+        :`<p class="pending">Photos from this part of camp are in the <a href="https://enangkareme.pixieset.com/equipped4lifesummercamp2026/" target="_blank" rel="noopener">full album ↗</a></p>`}
+    </div>`).join("");
+  const lb=$("lb");
+  $("g-sections").addEventListener("click",e=>{
+    const b=e.target.closest("button[data-g]"); if(!b) return;
+    const p=CAMP.gallery[b.dataset.g].photos[b.dataset.p];
+    $("lb-img").src=p.src; $("lb-img").alt=p.caption; $("lb-cap").textContent=p.caption;
+    if(lb.showModal) lb.showModal(); else lb.setAttribute("open","");
+  });
+  $("lb-close").onclick=()=>lb.close?lb.close():lb.removeAttribute("open");
+  lb.addEventListener("click",e=>{if(e.target===lb) lb.close();});
+
+  // activities
+  $("acts").innerHTML=CAMP.activities.map(a=>`
+    <article class="act">${icon(a.icon)}<h3>${esc(a.name)}</h3><p>${esc(a.text)}</p>
+      <ul>${a.points.map(t=>`<li>${esc(t)}</li>`).join("")}</ul></article>`).join("");
+
+  // form options
+  const opt=(name,v)=>`<label><input type="checkbox" name="${esc(name)}" value="${esc(v)}">${esc(v)}</label>`;
+  $("c-acts").innerHTML=CAMP.activities.map(a=>opt("Interests",a.name)).join("");
+  $("v-roles").innerHTML=CAMP.volunteerRoles.map(r=>opt("Preferred roles",r)).join("");
+
+  // routing
+  let pendingTab=null;
+  document.addEventListener("click",e=>{const a=e.target.closest("a[data-tab]"); if(a) pendingTab=a.dataset.tab;});
+  function setTab(t){
+    ["camper","volunteer"].forEach(k=>{$("tab-"+k).setAttribute("aria-selected",k===t);$("form-"+k).hidden=(k!==t);});
+    $("done").hidden=true;
+  }
+  function show(){
+    let h=(location.hash||"#home").slice(1);
+    if(!PAGES.includes(h)) h="home";
+    PAGES.forEach(p=>$("page-"+p).hidden=(p!==h));
+    document.querySelectorAll("nav.menu a").forEach(a=>a.dataset.page===h?a.setAttribute("aria-current","page"):a.removeAttribute("aria-current"));
+    if(h==="register"&&pendingTab) setTab(pendingTab);
+    pendingTab=null; window.scrollTo(0,0);
+  }
+  $("tab-camper").onclick=()=>setTab("camper");
+  $("tab-volunteer").onclick=()=>setTab("volunteer");
+  window.addEventListener("hashchange",show); show();
+
+  // forms → WhatsApp
+  let current="";
+  function handle(form,title,errId,groupId){
+    form.addEventListener("submit",e=>{
+      e.preventDefault(); let ok=true;
+      form.querySelectorAll("[required]").forEach(el=>{
+        const bad=el.type==="checkbox"?!el.checked:(!el.value.trim()||!el.checkValidity());
+        el.classList.toggle("invalid",bad); if(bad) ok=false;
+      });
+      if(groupId){
+        const any=$(groupId).querySelectorAll("input:checked").length>0;
+        $(groupId).querySelectorAll("label").forEach(l=>l.classList.toggle("invalid",!any)); if(!any) ok=false;
+      }
+      $(errId).hidden=ok;
+      if(!ok){form.querySelector(".invalid input, input.invalid, select.invalid, textarea.invalid")?.focus();return;}
+      const lines=[title,""], groups={};
+      form.querySelectorAll("input,select,textarea").forEach(el=>{
+        if(!el.name) return;
+        if(el.type==="checkbox"){ if(el.checked)(groups[el.name]=groups[el.name]||[]).push(el.value); return; }
+        if(el.value.trim()) lines.push(`${el.name}: ${el.value.trim()}`);
+      });
+      Object.entries(groups).forEach(([k,v])=>lines.push(`${k}: ${v.join(", ")}`));
+      lines.push("","Sent from the Equipped 4 Life website");
+      current=lines.join("\n");
+      $("msg-preview").textContent=current;
+      $("wa-link").href=waBase+"?text="+encodeURIComponent(current);
+      form.hidden=true; $("done").hidden=false; $("done").scrollIntoView({behavior:"smooth",block:"start"});
+    });
+    form.addEventListener("input",e=>{e.target.classList.remove("invalid"); e.target.closest("label")?.classList.remove("invalid");});
+    form.addEventListener("change",e=>{ if(groupId&&e.target.closest("#"+groupId)) $(groupId).querySelectorAll("label").forEach(l=>l.classList.remove("invalid")); });
+  }
+  handle($("form-camper"),"*CAMPER REGISTRATION*","c-err",null);
+  handle($("form-volunteer"),"*VOLUNTEER APPLICATION*","v-err","v-roles");
+  $("edit-again").onclick=()=>{ $("done").hidden=true; const t=$("tab-volunteer").getAttribute("aria-selected")==="true"?"volunteer":"camper"; $("form-"+t).hidden=false; };
+  $("copy-msg").onclick=()=>{
+    const b=$("copy-msg");
+    const sel=()=>{const r=document.createRange();r.selectNodeContents($("msg-preview"));const s=getSelection();s.removeAllRanges();s.addRange(r);b.textContent="Selected: press Ctrl+C";};
+    try{navigator.clipboard.writeText(current).then(()=>{b.textContent="Copied";setTimeout(()=>b.textContent="Copy details",1800);},sel);}catch(e){sel();}
+  };
+})();
+</script>
+</body>
+</html>
